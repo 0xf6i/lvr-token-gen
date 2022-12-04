@@ -5,6 +5,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
+	"strconv"
 	"time"
 )
 
@@ -21,11 +22,9 @@ func TokenGen() string {
     startTime := (time.Now().Unix() - 300000)
     expTime := (time.Now().Unix() + 1800000)
 
-    data := "st=" + string(startTime) + "~exp=" + string(expTime) + "~acl=*"
-
-    string := hmac256(data, string(key))
-
-    return data + "~hmac=" + string
+    data := "st=" + strconv.FormatInt(startTime, 10) + "~exp=" + strconv.FormatInt(startTime, 10) + "~acl=*"
+	
+    return data + "~hmac=" + hmac256(data, string(key))
 
 }
 
